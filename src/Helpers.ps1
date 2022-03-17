@@ -12,7 +12,7 @@ class ChannelProperties
 {
     #ChannelProperties
     [string]$Channel = 'GIT'
-    [ConsoleColor]$TitleColor = 'Magenta'
+    [ConsoleColor]$TitleColor = (Get-RandomColor)
     [ConsoleColor]$MessageColor = 'DarkGray'
     [ConsoleColor]$ErrorColor = 'DarkRed'
     [ConsoleColor]$SuccessColor = 'DarkGreen'

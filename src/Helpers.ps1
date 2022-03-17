@@ -18,7 +18,7 @@ class ChannelProperties
     [ConsoleColor]$SuccessColor = 'DarkGreen'
     [ConsoleColor]$ErrorDescriptionColor = 'DarkYellow'
 }
-$Global:ChannelProps = [ChannelProperties]::new()
+$Script:ChannelProps = [ChannelProperties]::new()
 
 
 function Write-ChannelMessage{                
@@ -28,8 +28,8 @@ function Write-ChannelMessage{
         [string]$Message        
     )
 
-    Write-Host "[$($Global:ChannelProps.Channel)] " -f $($Global:ChannelProps.TitleColor) -NoNewLine
-    Write-Host "$Message" -f $($Global:ChannelProps.MessageColor)
+    Write-Host "[$($Script:ChannelProps.Channel)] " -f $($Script:ChannelProps.TitleColor) -NoNewLine
+    Write-Host "$Message" -f $($Script:ChannelProps.MessageColor)
 }
 
 
@@ -42,13 +42,13 @@ function Write-ChannelResult{
     )
 
     if($Warning -eq $False){
-        Write-Host "[$($Global:ChannelProps.Channel)] " -f $($Global:ChannelProps.TitleColor) -NoNewLine
-        Write-Host "[ OK ] " -f $($Global:ChannelProps.SuccessColor) -NoNewLine
+        Write-Host "[$($Script:ChannelProps.Channel)] " -f $($Script:ChannelProps.TitleColor) -NoNewLine
+        Write-Host "[ OK ] " -f $($Script:ChannelProps.SuccessColor) -NoNewLine
     }else{
-        Write-Host "[WARN] " -f $($Global:ChannelProps.ErrorColor) -NoNewLine
+        Write-Host "[WARN] " -f $($Script:ChannelProps.ErrorColor) -NoNewLine
     }
     
-    Write-Host "$Message" -f $($Global:ChannelProps.MessageColor)
+    Write-Host "$Message" -f $($Script:ChannelProps.MessageColor)
 }
 
 
@@ -62,8 +62,8 @@ function Write-ChannelError{
     $formatstring = "{0}`n{1}"
     $fields = $Record.FullyQualifiedErrorId,$Record.Exception.ToString()
     $ExceptMsg=($formatstring -f $fields)
-    Write-Host "[$($Global:ChannelProps.Channel)] " -f $($Global:ChannelProps.TitleColor) -NoNewLine
-    Write-Host "[ERROR] " -f $($Global:ChannelProps.ErrorColor) -NoNewLine
+    Write-Host "[$($Script:ChannelProps.Channel)] " -f $($Script:ChannelProps.TitleColor) -NoNewLine
+    Write-Host "[ERROR] " -f $($Script:ChannelProps.ErrorColor) -NoNewLine
     Write-Host "$ExceptMsg`n`n" -ForegroundColor DarkYellow
 }
 
